@@ -35,6 +35,7 @@
         }
     }];
     if ([ESJsonFormat instance].isSwift) {
+#warning 此处加入新代码，可以适配ObjectMapper
         [resultStr appendFormat:@"\nrequired init?(map: Map) {\n}\nfunc mapping(map: Map) {\n"];
         NSString *str1 = [NSString stringWithFormat:@"%@",resultStr1];
         [resultStr appendFormat:@"%@",str1];
@@ -226,7 +227,7 @@
  *  @return
  */
 + (NSString *)parseClassContentForSwiftWithClassInfo:(ESClassInfo *)classInfo{
-    NSMutableString *result = [NSMutableString stringWithFormat:@"class %@: NSObject {\n",classInfo.className];
+    NSMutableString *result = [NSMutableString stringWithFormat:@"class %@: Mappable {\n",classInfo.className];
     [result appendString:classInfo.propertyContent];
     [result appendString:@"\n}"];
     if ([ESJsonFormatSetting defaultSetting].outputToFiles) {
